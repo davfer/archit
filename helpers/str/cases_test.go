@@ -119,6 +119,34 @@ func TestConvert(t *testing.T) {
 			to:   Snake,
 			want: "kebab_case",
 		},
+		{
+			name: "pascal",
+			str:  "PascalCase",
+			from: Pascal,
+			to:   Camel,
+			want: "pascalCase",
+		},
+		{
+			name: "camel",
+			str:  "camelCase",
+			from: Camel,
+			to:   Pascal,
+			want: "CamelCase",
+		},
+		{
+			name: "whitespace",
+			str:  "whitespace separated",
+			from: Whitespace,
+			to:   Snake,
+			want: "whitespace_separated",
+		},
+		{
+			name: "lower",
+			str:  "Lower",
+			from: Pascal,
+			to:   Camel,
+			want: "lower",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

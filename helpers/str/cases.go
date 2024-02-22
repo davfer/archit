@@ -132,6 +132,7 @@ func (p capitalCase) Parse(s string) (ws Words, ok bool) {
 		return
 	}
 
+	// TODO: This makes "Pascal" !€ Pascal only "PascalCase" makes it, same for Camel !€ "camel" != camelCase
 	rest := s[1:]
 	if strings.ToLower(rest) == rest {
 		return
@@ -165,15 +166,15 @@ func (p capitalCase) Build(ws Words) (string, bool) {
 		return "", false
 	}
 	var column strings.Builder
-	for _, w := range ws {
+	for i, w := range ws {
 		if w == "" {
 			continue
 		}
 
-		if p.mustStartsWithUpper {
+		if p.mustStartsWithUpper || i > 0 {
 			column.WriteString(strings.Title(w))
 		} else {
-			column.WriteString(w)
+			column.WriteString(strings.ToLower(w))
 		}
 	}
 
