@@ -1,10 +1,13 @@
 package str
 
 import (
+	"strings"
+
 	"github.com/davfer/archit/helpers/sli"
 	"github.com/davfer/archit/patterns/opts"
 	"github.com/davfer/archit/patterns/parser"
-	"strings"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 var defaultEntries = []caseEntry{
@@ -172,9 +175,9 @@ func (p capitalCase) Build(ws Words) (string, bool) {
 		}
 
 		if p.mustStartsWithUpper || i > 0 {
-			column.WriteString(strings.Title(w))
+			column.WriteString(cases.Title(language.Und).String(w))
 		} else {
-			column.WriteString(strings.ToLower(w))
+			column.WriteString(cases.Lower(language.Und).String(w))
 		}
 	}
 
